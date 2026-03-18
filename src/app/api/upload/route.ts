@@ -153,7 +153,7 @@ export async function GET() {
     await connectToDatabase();
 
     const documents = await DocumentDB.find({
-      userId: session.user.id
+      userId: (session.user as any).id
     }).sort({ createdAt: -1 });
 
     return NextResponse.json({ documents });
