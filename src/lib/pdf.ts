@@ -3,7 +3,7 @@ import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.js";
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
-export async function extractTextFromPDF(buffer) {
+export async function extractTextFromPDF(buffer: Buffer) {
   const loadingTask = pdfjsLib.getDocument({ data: buffer });
   const pdf = await loadingTask.promise;
 
@@ -13,7 +13,7 @@ export async function extractTextFromPDF(buffer) {
     const page = await pdf.getPage(i);
     const content = await page.getTextContent();
 
-    const strings = content.items.map(item => item.str);
+    const strings = content.items.map((item: any) => item.str);
     fullText += strings.join(" ") + "\n";
   }
 
