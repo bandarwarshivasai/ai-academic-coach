@@ -96,10 +96,11 @@ export async function POST(req: Request) {
 
     await connectToDatabase();
 
-    const namespace = `user-${session.user.id}-${Date.now()}`;
+    const userId = (session.user as any).id;
+    const namespace = `user-${userId}-${Date.now()}`;
 
     const docRecord = await DocumentDB.create({
-      userId: session.user.id,
+      userId: (session.user as any).id,
       filename: file.name,
       summary,
       content: text,
