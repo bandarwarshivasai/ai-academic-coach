@@ -8,7 +8,8 @@ import connectToDatabase from "@/lib/mongoose";
 import DocumentDB from "@/models/Document";
 import { Pinecone } from "@pinecone-database/pinecone";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { extractTextFromPDF } from "../../../lib/pdf";
+
+import { extractTextFromPDF } from "../../../lib/pdf"; // fixed path
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY! });
