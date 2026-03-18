@@ -1,26 +1,115 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 2, 2, 7;
+  --background-end-rgb: 5, 5, 15;
+  --accent-indigo: 99, 102, 241;
+  --accent-purple: 168, 85, 247;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: radial-gradient(circle at top left, rgba(var(--accent-indigo), 0.15), transparent 40%),
+              radial-gradient(circle at bottom right, rgba(var(--accent-purple), 0.1), transparent 40%),
+              rgb(var(--background-start-rgb));
+  font-family: var(--font-inter), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-outfit), sans-serif;
+}
+
+@utility custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.4);
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.6);
+  }
+}
+
+/* Blob animations */
+@keyframes blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+.animate-blob {
+  animation: blob 7s infinite;
+}
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Active sidebar link */
+.sidebar-active {
+  background: linear-gradient(to right, rgba(99, 102, 241, 0.15), rgba(99, 102, 241, 0.05));
+  color: white;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(99, 102, 241, 0.1);
+}
+/* Markdown Styling for AI Chat */
+.prose-custom {
+  @apply text-gray-200 leading-relaxed text-sm;
+}
+.prose-custom strong {
+  @apply text-white font-bold;
+}
+.prose-custom h1, .prose-custom h2, .prose-custom h3 {
+  @apply text-white font-bold mt-6 mb-3;
+}
+.prose-custom h1 { @apply text-2xl; }
+.prose-custom h2 { @apply text-xl; }
+.prose-custom h3 { @apply text-lg; }
+.prose-custom ul {
+  @apply list-disc list-outside space-y-2 my-4 ml-4;
+}
+.prose-custom ol {
+  @apply list-decimal list-outside space-y-2 my-4 ml-4;
+}
+.prose-custom code {
+  @apply bg-white/10 px-1.5 py-0.5 rounded text-indigo-300 font-mono text-xs;
+}
+.prose-custom pre {
+  @apply bg-black/40 p-5 rounded-2xl border border-white/10 my-6 overflow-x-auto shadow-inner;
+}
+.prose-custom pre code {
+  @apply bg-transparent p-0 text-white/90 block font-mono text-xs leading-5;
+}
+.prose-custom p {
+  @apply mb-4 last:mb-0;
+}
+.prose-custom a {
+  @apply text-indigo-400 hover:text-indigo-300 underline underline-offset-4 decoration-indigo-500/50 hover:decoration-indigo-400 transition-all font-bold;
+}
+.prose-custom blockquote {
+  @apply border-l-4 border-indigo-500/50 pl-5 italic my-6 text-gray-400 bg-white/5 py-4 rounded-r-xl;
+}
+.prose-custom table {
+  @apply w-full my-6 border-collapse text-left text-xs bg-white/5 rounded-xl overflow-hidden;
+}
+.prose-custom th {
+  @apply bg-white/10 p-3 font-bold text-white border-b border-white/10;
+}
+.prose-custom td {
+  @apply p-3 border-b border-white/5 text-gray-300;
 }
